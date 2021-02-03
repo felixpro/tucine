@@ -1,11 +1,13 @@
 import React, {Fragment, useState} from 'react';
 
-const AddMovie = ({crearMovie}) => {
+const Formulario = ({crearMovie}) => {
 
   const [Movie, actualizarMovie] = useState({
     name:"",
     description:"",
   })
+
+  const {name, description} = Movie;
 
 const actualizarState = e => {
   actualizarMovie({
@@ -20,8 +22,6 @@ const submitMovie = (e) => {
   e.preventDefault();
 
 // insert to server
-
-
 
 // Reiniciar el form. Resetear el value en los input
 actualizarMovie({
@@ -44,7 +44,7 @@ actualizarMovie({
           onChange={actualizarState}
           value={name}
         />
-
+        <br/>
         <label >description</label>
         <input
           type="string"
@@ -53,6 +53,8 @@ actualizarMovie({
           onChange={actualizarState}
           value={description}
         />
+           <br/><br/>
+
           <button
             type="submit"
             className="u-full-width button-primary"
@@ -60,9 +62,11 @@ actualizarMovie({
               Add Movie
             </button>
       </form>
+
+
     </Fragment>
   );
 }
 
 
-export default AddMovie;
+export default Formulario;
