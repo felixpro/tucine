@@ -1,5 +1,7 @@
 import React, {Fragment, useState} from 'react';
 
+
+
 const Formulario = ({crearMovie}) => {
 
   const [Movie, actualizarMovie] = useState({
@@ -7,7 +9,7 @@ const Formulario = ({crearMovie}) => {
     description:"",
   })
 
-  const {name, description} = Movie;
+const {name, description} = Movie;
 
 const actualizarState = e => {
   actualizarMovie({
@@ -15,8 +17,6 @@ const actualizarState = e => {
     [e.target.name]: e.target.value
   })
 }
-
-
 // cuando el usuario presiona agregar Movie
 const submitMovie = (e) => {
   e.preventDefault();
@@ -62,8 +62,6 @@ actualizarMovie({
               Add Movie
             </button>
       </form>
-
-
     </Fragment>
   );
 }
