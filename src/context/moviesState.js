@@ -7,14 +7,14 @@ import {
     LIST_MOVIES,
     CREATE_MOVIE,
     DELETE_MOVIE
-   } from '../types/types'
+   } from '../types/types';
 
 
 
  const MoviesState = props => {
 
    const initialState = {
-     moviesList: [],
+     moviesLists: [],
      movies: null,
      movieSelected: null,
    }
@@ -23,6 +23,7 @@ import {
 const [state, dispath] = useReducer(moviesReducer, initialState);
 
 
+// get movies
 const getMovies = () => {
     axios.get('https://myappinow.herokuapp.com/movies')
     .then(function (response) {
@@ -36,12 +37,44 @@ const getMovies = () => {
     })
 }
 
+// CREATE movies
+const createMovie = (movie) => {
+  axios.post('https://myappinow.herokuapp.com/movies',movie )
+    .then(function (response) {
+      dispath({
+         type: CREATE_MOVIE,
+         payload: movie
+     })
+    })
+    .catch(function (error) {
+    console.log(error);
+    })
+
+}
+
+
+// DELETE movies
+const deleteMovie = (_id, name) => {
+  axios.delete(`https://myappinow.herokuapp.com/movies/${_id}` )
+    .then(function (response) {
+      dispath({
+         type: DELETE_MOVIE,
+         payload: name
+     })
+    })
+    .catch(function (error) {
+    console.log(error);
+    })
+}
+
 
    return (
      <moviesContext.Provider
          value={{
-            moviesList: state.moviesList,
-            getMovies
+            moviesLists: state.moviesLists,
+            getMovies,
+            createMovie,
+            deleteMovie
          }}
        >
        {props.children}

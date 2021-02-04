@@ -1,6 +1,6 @@
 import {
     LIST_MOVIES,
-    CREATE_MOVIE,
+    CREATE_MOVIE ,
     DELETE_MOVIE
    } from '../types/types'
   
@@ -12,9 +12,18 @@ import {
     case LIST_MOVIES:
       return {
           ...state,
-          moviesList: action.payload
+          moviesLists: action.payload
         }
-  
+    case CREATE_MOVIE:
+      return {
+          ...state,
+          moviesLists: [...state.moviesLists, action.payload ]
+            }
+    case DELETE_MOVIE:
+          return {
+            ...state,
+            moviesLists: state.moviesLists.filter(movie=>movie.name !== action.payload)
+               }
       default:
         return state;
     }

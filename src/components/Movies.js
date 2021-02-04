@@ -3,7 +3,7 @@ import moviesContext from '../context/moviesContext';
 
 function Movies() {
   const moviesContexts = useContext(moviesContext)
-  const {moviesList, getMovies} = moviesContexts;
+  const {moviesLists, getMovies, deleteMovie} = moviesContexts;
 
   useEffect(()=>{
     getMovies()
@@ -14,10 +14,17 @@ function Movies() {
   return (
     <div className="Movies">
         <h1>Todos las peliculas</h1>  
-        {moviesList.map(movie => (
-          <Fragment>
-            <h1>{movie.name}</h1>
-            <p>{movie.Description}</p>
+        {moviesLists.map(movie => (
+          <Fragment> 
+            <p>{movie.name}</p>
+             <button
+            type="submit"
+            className="u-full-width button-primary"
+            onClick={() => deleteMovie(movie._id, movie.name)}
+            >
+              Delete Movie
+            </button>
+            
           </Fragment>
         ))}
     </div>

@@ -1,13 +1,18 @@
-import React, {Fragment, useState} from 'react';
-
+import React, {Fragment, useState, useContext } from 'react';
+import moviesContext from '../context/moviesContext';
 
 
 const Formulario = ({crearMovie}) => {
 
-  const [Movie, actualizarMovie] = useState({
-    name:"",
-    description:"",
-  })
+//  Movies context
+const moviesContexts = useContext(moviesContext)
+const {moviesLists, getMovies, createMovie} = moviesContexts;
+
+
+const [Movie, actualizarMovie] = useState({
+  name:"",
+  description:"",
+})
 
 const {name, description} = Movie;
 
@@ -17,11 +22,13 @@ const actualizarState = e => {
     [e.target.name]: e.target.value
   })
 }
+
 // cuando el usuario presiona agregar Movie
 const submitMovie = (e) => {
   e.preventDefault();
-
+  
 // insert to server
+createMovie(Movie)
 
 // Reiniciar el form. Resetear el value en los input
 actualizarMovie({
